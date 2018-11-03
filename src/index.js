@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import TodoModel from './TodoModel'
 import 'todomvc-common/base.css';
-import 'todomvc-app-css/index.css';
+import './index.css';
 
 var model = new TodoModel('react-todos');
 
