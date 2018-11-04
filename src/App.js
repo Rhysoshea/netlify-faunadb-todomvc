@@ -207,7 +207,7 @@ class App extends Component {
     return (
       <div>
         <header className="header">
-          <h1>todos</h1>
+          <h1>Patient List</h1>
           <Login model={this.props.model} onError={this.onError.bind(this)} onAuthChange={this.onAuthChange.bind(this)} />
           {this.state.faunadb_token ? listNavigator : ''}
           {this.state.faunadb_token ? inputArea : ''}
