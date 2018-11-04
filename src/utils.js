@@ -1,7 +1,12 @@
+// export const ALL_LISTS = 'lists';
+// export const ALL_TODOS = 'all';
+// export const ACTIVE_TODOS = 'active';
+// export const COMPLETED_TODOS = 'completed';
+
 export const ALL_LISTS = 'lists';
-export const ALL_TODOS = 'all';
-export const ACTIVE_TODOS = 'active';
-export const COMPLETED_TODOS = 'completed';
+export const ALL_PATIENTS = 'all';
+export const ACTIVE_PATIENTS = 'active';
+export const COMPLETED_PATIENTS = 'completed';
 
 export default {
 		uuid() {

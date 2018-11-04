@@ -4,8 +4,9 @@ import { Router } from 'director/build/director';
 import TodoFooter from './Footer';
 import TodoItem from './TodoItem';
 import Login from './Login';
+import getPatients from './getPatients.js'
 // import ListChooser from './ListChooser';
-import {ALL_LISTS, ALL_TODOS, ACTIVE_TODOS, COMPLETED_TODOS} from './utils'
+import {ALL_LISTS, ALL_PATIENTS, ACTIVE_PATIENTS, COMPLETED_PATIENTS} from './utils'
 
 const ENTER_KEY = 13;
 
@@ -25,15 +26,15 @@ class App extends Component {
       '/': setState.bind(this, {nowShowing: ALL_LISTS}),
       '/list/:listId/': (listId) => {
         this.props.model.getList(listId)
-        this.setState({nowShowing: ALL_TODOS})
+        this.setState({nowShowing: ALL_PATIENTS})
       },
       '/list/:listId/active': (listId) => {
         this.props.model.getList(listId)
-        this.setState({nowShowing: ACTIVE_TODOS})
+        this.setState({nowShowing: ACTIVE_PATIENTS})
       },
       '/list/:listId/completed': (listId) =>{
         this.props.model.getList(listId)
-        this.setState({nowShowing: COMPLETED_TODOS})
+        this.setState({nowShowing: COMPLETED_PATIENTS})
       }
     });
     router.init('/');
@@ -140,16 +141,31 @@ class App extends Component {
 
       var shownTodos = todos.filter(function (todo) {
         switch (this.state.nowShowing) {
-        case ACTIVE_TODOS:
+        case ACTIVE_PATIENTS:
           return !todo.data.completed;
-        case COMPLETED_TODOS:
+        case COMPLETED_PATIENTS:
           return todo.data.completed;
         default:
           return true;
         }
       }, this);
 
-      var todoItems = shownTodos.map(function (todo) {
+      // var todoItems = shownTodos.map(function (todo) {
+      //   return (
+      //     <TodoItem
+      //       key={todo.ref.value.id}
+      //       todo={todo.data}
+      //       onToggle={this.toggle.bind(this, todo)}
+      //       onDestroy={this.destroy.bind(this, todo)}
+      //       onEdit={this.edit.bind(this, todo)}
+      //       editing={this.state.editing === todo.ref}
+      //       onSave={this.save.bind(this, todo)}
+      //       onCancel={this.cancel.bind(this)}
+      //     />
+      //   );
+      // }, this);
+
+      var patientItem = shownTodos.map(function (todo) {
         return (
           <TodoItem
             key={todo.ref.value.id}
