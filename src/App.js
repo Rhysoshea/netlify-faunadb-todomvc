@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Router } from 'director/build/director';
 
 import TodoFooter from './Footer';
-import TodoItem from './TodoItem';
+// import TodoItem from './TodoItem';
 import Login from './Login';
-import getPatients from './getPatients.js'
+import getPatients from './getPatients';
 // import ListChooser from './ListChooser';
 import {ALL_LISTS, ALL_PATIENTS, ACTIVE_PATIENTS, COMPLETED_PATIENTS} from './utils'
 
@@ -132,7 +132,7 @@ class App extends Component {
         <label>Choose a list.</label>
       </div>
     } else {
-      var todos = this.props.model.todos();
+      var patients = this.props.model.todos();
 
       listNavigator = <div className="listNav">
         <label>{this.props.model.list() && this.props.model.list().data.title}</label>
@@ -167,15 +167,15 @@ class App extends Component {
 
       var patientItem = shownTodos.map(function (todo) {
         return (
-          <TodoItem
-            key={todo.ref.value.id}
-            todo={todo.data}
-            onToggle={this.toggle.bind(this, todo)}
-            onDestroy={this.destroy.bind(this, todo)}
-            onEdit={this.edit.bind(this, todo)}
-            editing={this.state.editing === todo.ref}
-            onSave={this.save.bind(this, todo)}
-            onCancel={this.cancel.bind(this)}
+          <getPatients
+            // key={todo.ref.value.id}
+            // todo={todo.data}
+            // onToggle={this.toggle.bind(this, todo)}
+            // onDestroy={this.destroy.bind(this, todo)}
+            // onEdit={this.edit.bind(this, todo)}
+            // editing={this.state.editing === todo.ref}
+            // onSave={this.save.bind(this, todo)}
+            // onCancel={this.cancel.bind(this)}
           />
         );
       }, this);
@@ -205,8 +205,8 @@ class App extends Component {
               onChange={this.toggleAll.bind(this)}
               checked={activeTodoCount === 0}
             />
-            <ul className="todo-list">
-              {todoItems}
+            <ul className="patient-list">
+              {patientItem}
             </ul>
           </section>
         );
