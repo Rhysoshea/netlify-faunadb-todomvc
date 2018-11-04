@@ -121,14 +121,14 @@ class App extends Component {
           </ul>
         </section>
       );
-      inputArea = <input
-          className="new-todo"
-          placeholder="Create a new list or choose from below."
-          value={this.state.newTodo}
-          onKeyDown={this.handleNewTodoKeyDown.bind(this)}
-          onChange={this.handleChange.bind(this)}
-          autoFocus={true}
-        />;
+      // inputArea = <input
+      //     className="new-todo"
+      //     placeholder="Create a new list or choose from below."
+      //     value={this.state.newTodo}
+      //     onKeyDown={this.handleNewTodoKeyDown.bind(this)}
+      //     onChange={this.handleChange.bind(this)}
+      //     autoFocus={true}
+      //   />;
       listNavigator = <div className="listNav">
         <label>Choose a list.</label>
       </div>
