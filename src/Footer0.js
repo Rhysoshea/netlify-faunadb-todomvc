@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Utils, {ALL_PATIENTS, ACTIVE_PATIENTS, COMPLETED_PATIENTS} from './utils'
+import Utils, {ALL_TODOS, ACTIVE_TODOS, COMPLETED_TODOS} from './utils'
 import classNames from 'classnames';
 
 class TodoFooter extends Component {
@@ -27,7 +27,7 @@ class TodoFooter extends Component {
 					<li>
 						<a
 							href="#/"
-							className={classNames({selected: nowShowing === ALL_PATIENTS})}>
+							className={classNames({selected: nowShowing === ALL_TODOS})}>
 								All
 						</a>
 					</li>
@@ -35,7 +35,7 @@ class TodoFooter extends Component {
 					<li>
 						<a
 							href="#/active"
-							className={classNames({selected: nowShowing === ACTIVE_PATIENTS})}>
+							className={classNames({selected: nowShowing === ACTIVE_TODOS})}>
 								Active
 						</a>
 					</li>
@@ -43,7 +43,7 @@ class TodoFooter extends Component {
 					<li>
 						<a
 							href="#/completed"
-							className={classNames({selected: nowShowing === COMPLETED_PATIENTS})}>
+							className={classNames({selected: nowShowing === COMPLETED_TODOS})}>
 								Completed
 						</a>
 					</li>

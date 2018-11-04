@@ -21,30 +21,28 @@ class App extends Component {
     }
   }
 
-  getPatients();
-
-  // componentDidMount () {
-  //   var setState = this.setState;
-  //   var router = Router({
-  //     '/': setState.bind(this, {nowShowing: ALL_LISTS}),
-  //     '/list/:listId/': (listId) => {
-  //       this.props.model.getList(listId)
-  //       this.setState({nowShowing: ALL_PATIENTS})
-  //     },
-  //     '/list/:listId/active': (listId) => {
-  //       this.props.model.getList(listId)
-  //       this.setState({nowShowing: ACTIVE_PATIENTS})
-  //     },
-  //     '/list/:listId/completed': (listId) =>{
-  //       this.props.model.getList(listId)
-  //       this.setState({nowShowing: COMPLETED_PATIENTS})
-  //     }
-  //   });
-  //   router.init('/');
-  // }
-  // // componentWillReceiveProps() {
-  // //   console.log(this, arguments)
-  // // }
+  componentDidMount () {
+    var setState = this.setState;
+    var router = Router({
+      '/': setState.bind(this, {nowShowing: ALL_LISTS}),
+      '/list/:listId/': (listId) => {
+        this.props.model.getList(listId)
+        this.setState({nowShowing: ALL_PATIENTS})
+      },
+      '/list/:listId/active': (listId) => {
+        this.props.model.getList(listId)
+        this.setState({nowShowing: ACTIVE_PATIENTS})
+      },
+      '/list/:listId/completed': (listId) =>{
+        this.props.model.getList(listId)
+        this.setState({nowShowing: COMPLETED_PATIENTS})
+      }
+    });
+    router.init('/');
+  }
+  componentWillReceiveProps() {
+    console.log(this, arguments)
+  }
   // handleChange (event) {
   //   this.setState({newTodo: event.target.value});
   // }
@@ -100,58 +98,58 @@ class App extends Component {
   // go(link) {
   //   window.location.hash = link;
   // }
-  // render () {
-  //   console.log("model", this.props.model);
-  //   var footer, listNavigator;
-  //   var main;
-  //   var inputArea;
-  //   if (this.state.nowShowing === ALL_LISTS) {
-  //     var lists = this.props.model.lists;
-  //     main = (
-  //       <section className="main">
-  //         <ul className="patient-list">
-  //           {lists.map(
-  //             ({data, ref}) => {
-  //               console.log("list", data, ref)
-  //               return <li key={ref.value.id} >
-  //           <label onClick={this.go.bind(this, "/list/"+ref.value.id)}>
-  //             {data.title}
-  //           </label>
-  //           </li>}
-  //
-  //         )}
-  //         </ul>
-  //       </section>
-  //     );
-  //     inputArea = <input
-  //         className="new-todo"
-  //         placeholder="Create a new list or choose from below."
-  //         value={this.state.newTodo}
-  //         onKeyDown={this.handleNewTodoKeyDown.bind(this)}
-  //         onChange={this.handleChange.bind(this)}
-  //         autoFocus={true}
-  //       />;
-  //     listNavigator = <div className="listNav">
-  //       <label>Choose a list.</label>
-  //     </div>
-  //   } else {
-  //     var patients = this.props.model.todos();
-  //
-  //     listNavigator = <div className="listNav">
-  //       <label>{this.props.model.list() && this.props.model.list().data.title}</label>
-  //       <button onClick={this.go.bind(this, "/")}>back to all lists</button>
-  //     </div>
-  //
-  //     var shownTodos = todos.filter(function (todo) {
-  //       switch (this.state.nowShowing) {
-  //       case ACTIVE_PATIENTS:
-  //         return !todo.data.completed;
-  //       case COMPLETED_PATIENTS:
-  //         return todo.data.completed;
-  //       default:
-  //         return true;
-  //       }
-  //     }, this);
+  render () {
+    console.log("model", this.props.model);
+    var footer, listNavigator;
+    var main;
+    var inputArea;
+    if (this.state.nowShowing === ALL_LISTS) {
+      var lists = this.props.model.lists;
+      main = (
+        <section className="main">
+          <ul className="patient-list">
+            {lists.map(
+              ({data, ref}) => {
+                console.log("list", data, ref)
+                return <li key={ref.value.id} >
+            <label onClick={this.go.bind(this, "/list/"+ref.value.id)}>
+              {data.title}
+            </label>
+            </li>}
+
+          )}
+          </ul>
+        </section>
+      );
+      inputArea = <input
+          className="new-todo"
+          placeholder="Create a new list or choose from below."
+          value={this.state.newTodo}
+          onKeyDown={this.handleNewTodoKeyDown.bind(this)}
+          onChange={this.handleChange.bind(this)}
+          autoFocus={true}
+        />;
+      listNavigator = <div className="listNav">
+        <label>Choose a list.</label>
+      </div>
+    } else {
+      var patients = this.props.model.patients();
+
+      listNavigator = <div className="listNav">
+        <label>{this.props.model.list() && this.props.model.list().data.title}</label>
+        <button onClick={this.go.bind(this, "/")}>back to all lists</button>
+      </div>
+
+      var shownPatient = patients.filter(function (patient) {
+        switch (this.state.nowShowing) {
+        case ACTIVE_PATIENTS:
+          return !patient.data.completed;
+        case COMPLETED_PATIENTS:
+          return patient.data.completed;
+        default:
+          return true;
+        }
+      }, this);
   //
   //     // var todoItems = shownTodos.map(function (todo) {
   //     //   return (
@@ -168,20 +166,20 @@ class App extends Component {
   //     //   );
   //     // }, this);
   //
-  //     var patientItem = shownTodos.map(function (todo) {
-  //       return (
-  //         <getPatients
-  //           // key={todo.ref.value.id}
-  //           // todo={todo.data}
-  //           // onToggle={this.toggle.bind(this, todo)}
-  //           // onDestroy={this.destroy.bind(this, todo)}
-  //           // onEdit={this.edit.bind(this, todo)}
-  //           // editing={this.state.editing === todo.ref}
-  //           // onSave={this.save.bind(this, todo)}
-  //           // onCancel={this.cancel.bind(this)}
-  //         />
-  //       );
-  //     }, this);
+      var patientItem = shownPatient.map(function (patient) {
+        return (
+          <getPatients
+            key={patient.ref.value.id}
+            patient={patient.data}
+            onToggle={this.toggle.bind(this, patient)}
+            onDestroy={this.destroy.bind(this, patient)}
+            onEdit={this.edit.bind(this, patient)}
+            editing={this.state.editing === patient.ref}
+            onSave={this.save.bind(this, patient)}
+            onCancel={this.cancel.bind(this)}
+          />
+        );
+      }, this);
   //
   //     var activeTodoCount = todos.reduce(function (accum, todo) {
   //       return (todo.data && todo.data.completed) ? accum : accum + 1;
@@ -223,20 +221,20 @@ class App extends Component {
   //         autoFocus={true}
   //       />;
   //   }
-  //   return (
-  //     <div>
-  //       <header className="header">
-  //         <h1>Patient List</h1>
-  //         <Login model={this.props.model} onError={this.onError.bind(this)} onAuthChange={this.onAuthChange.bind(this)} />
-  //         {this.state.faunadb_token ? listNavigator : ''}
-  //         {this.state.faunadb_token ? inputArea : ''}
-  //       </header>
-  //       {main}
-  //       {footer}
-  //     </div>
-  //   );
-  // }
-
+    return (
+      <div>
+        <header className="header">
+          <h1>Patient List</h1>
+          <Login model={this.props.model} onError={this.onError.bind(this)} onAuthChange={this.onAuthChange.bind(this)} />
+          {this.state.faunadb_token ? listNavigator : ''}
+          {this.state.faunadb_token ? inputArea : ''}
+        </header>
+        {main}
+        {footer}
+      </div>
+    );
+  }
+}
 }
 
 export default App;
