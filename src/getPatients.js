@@ -1,7 +1,7 @@
 const faunadb = require('faunadb'),
   q = faunadb.query;
 
-const client = new faunadb.Client({ secret: 'process.env.FAUNADB_SECRET' });
+const client = new faunadb.Client({ secret: 'process.env.FAUNADB_SERVER_SECRET' });
 
 
 client.query(
